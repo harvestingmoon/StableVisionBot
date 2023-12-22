@@ -86,7 +86,7 @@ async def t2img(update: Update, context: CallbackContext) -> None:
         logging.info("User of text:",user_input)
         pipe = engine.call_engine(1)
         await update.message.reply_text(emoji.emojize("Painting! This may take awhile... :paintbrush:"))
-        images = pipe(prompt = user_input).images[0]
+        images = pipe(prompt = user_input,num_inference_steps = 50).images[0]
         final_images = post_process(images)
         await context.bot.send_photo(chat_id=update.effective_chat.id,photo = final_images ,filename ='photo.jpg', caption = f"Generated Image of {user_input}")
         return ConversationHandler.END

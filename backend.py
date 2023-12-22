@@ -1,4 +1,4 @@
-from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler, StableDiffusionImg2ImgPipeline
+from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler, StableDiffusionImg2ImgPipeline, DDIMScheduler
 import torch
 import io
 from PIL import Image
@@ -32,7 +32,7 @@ class BackEnd:
                     if v == True:
                         call[k] = False
             if type == 1:
-                scheduler = EulerDiscreteScheduler.from_pretrained(model_id,subfolder = "scheduler")
+                scheduler = DDIMScheduler.from_pretrained(model_id,subfolder = "scheduler")
                 pipe = StableDiffusionPipeline.from_pretrained(model_id,scheduler= scheduler, torch_dtype = torch.float16)
             else:
                 pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id,torch_dtype = torch.float16)
