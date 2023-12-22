@@ -9,6 +9,9 @@ It is built using the ptb package as well as the huggingface :hugs: diffusers li
 
 I will be continuously improving and working on this model more so as a small project :
 
+## Notice:
+Currently, the board can only send photos that are up to 5mb big due to the limitations of ptb (as well as other post processing factors like limiting pixel to only 10000px). However, I am working on a feature where the bot will send a document which would bypass this issue. Any suggestions do send a pull request or let me know! :smile:
+
 
 # Table of Contents :clipboard:
 - [Features](#features)
