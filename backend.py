@@ -8,12 +8,17 @@ class BackEnd:
     def __init__(self,model_id) -> None:
         self.model = None
         self.curr_picture = None 
+        self.final_img = None
         self.call = {1:False,2:False}
         self.model_id = (model_id if model_id else "stabilityai/stable-diffusion-2")
     def change_picture(self,array): # picture received from user is a byte array  need to convert into image 
         picture = io.BytesIO(array)
         image = Image.open(picture).convert("RGB")
         self.curr_picture = image # store it temp 
+    def final_(self,img):
+        self.final_img = img
+    def get_final(self):
+        return self.final_img
     def get_picture(self):
          return self.curr_picture
     def change_model(self,model):
@@ -43,7 +48,7 @@ class BackEnd:
 
 
 ''' Post processing of images'''
-def post_process(image):
+def post_process(image,to_doc = True):
     def resize_image(image, max_size):
         quality = 95
         while True:
@@ -85,12 +90,15 @@ def post_process(image):
 
     def pil_to_file(image):
         file = io.BytesIO()
-        image.save(file, format='PNG')
+        if to_doc:
+            image.save(file, format='PDF')
+        else:
+            image.save(file,format = 'JPG')
         file.seek(0)
         return file
-
-    image = resize_image(image, 9 * 1024)
-    image = enforce_ratio(image,18)
-    image = limit_pixels(image, 8000)
+    if not to_doc:
+      image = resize_image(image, 9 * 1024)
+      image = enforce_ratio(image,18)
+      image = limit_pixels(image, 8000)
     image = pil_to_file(image)
     return image

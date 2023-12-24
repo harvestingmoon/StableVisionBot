@@ -31,6 +31,8 @@ Currently, the board can only send photos that are up to 5mb big due to the limi
 ## Updates
 v1.0: Original release of model
 
+v1.1: Added support for sending document for higher quality images! 
+
 ## Installation 
 Instructions on how to install and set up the project.
 
@@ -61,6 +63,7 @@ or run it on VSCode by clicking the top right triangle
 Model currently supports the following features:  
 - Text to image AI generation
 - Image to Image AI generation (Image editing)
+- Higher quality images now sent via PDF
 
 Future features:
 - Support other pipelines (currently support stable diffusion only)
